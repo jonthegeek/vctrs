@@ -220,20 +220,21 @@ test_that("vec_c() preserves row names and inner names", {
   expect_identical(names(nested_out$oo), c("a", "b", "c", "FOO"))
 })
 
-test_that("vec_c() outer names work with proxied objects", {
+test_that("vec_c() outer names work with POSIXlt", {
+  # Result is pushed towards POSIXct, even with only 1 input
   x <- as.POSIXlt(new_datetime(0))
-  exp <- set_names(x, "outer")
-  expect_equal(vec_c(outer = x), exp)
+  exp <- set_names(as.POSIXct(x), "outer")
+  expect_identical(vec_c(outer = x), exp)
 
   named_x <- set_names(x, "inner")
-  exp <- set_names(named_x, "outer_inner")
+  exp <- set_names(as.POSIXct(named_x), "outer_inner")
   expect_error(vec_c(outer = named_x), "Please supply")
-  expect_equal(vec_c(outer = named_x, .name_spec = "{outer}_{inner}"), exp)
+  expect_identical(vec_c(outer = named_x, .name_spec = "{outer}_{inner}"), exp)
 
   xs <- as.POSIXlt(new_datetime(c(0, 1)))
-  exp <- set_names(xs, c("outer_1", "outer_2"))
+  exp <- set_names(as.POSIXct(xs), c("outer_1", "outer_2"))
   expect_error(vec_c(outer = xs), "Please supply")
-  expect_equal(vec_c(outer = xs, .name_spec = "{outer}_{inner}"), exp)
+  expect_identical(vec_c(outer = xs, .name_spec = "{outer}_{inner}"), exp)
 })
 
 test_that("vec_c() works with simple homogeneous foreign S3 classes", {
