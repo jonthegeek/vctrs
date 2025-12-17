@@ -150,8 +150,8 @@ test_that("POSIXlt always steered towards POSIXct in vec_ptype()", {
   x <- as.POSIXlt("2020-01-01", tz = "UTC")
   expect_identical(vec_ptype(x), new_datetime(tzone = "UTC"))
 
-  x <- as.POSIXlt("2020-01-01", tz = "")
-  expect_identical(vec_ptype(x), new_datetime(tzone = ""))
+  x <- as.POSIXlt("2020-01-01", tz = "America/New_York")
+  expect_identical(vec_ptype(x), new_datetime(tzone = "America/New_York"))
 })
 
 test_that("POSIXlt always steered towards POSIXct in vec_ptype2()", {
