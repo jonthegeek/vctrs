@@ -167,7 +167,7 @@ vec_default_ptype2 <- function(
       x <- fallback_class_remove(x)
     }
     if (is_common_class_fallback(y)) {
-      y <- fallback_class(y)
+      y <- fallback_class_remove(y)
     }
   }
 
