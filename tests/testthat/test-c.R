@@ -438,6 +438,7 @@ test_that("vec_c() doesn't fall back when ptype2 is implemented", {
 
   with_methods(
     vec_ptype2.vctrs_foobar.vctrs_foobar = function(x, y, ...) new_quux(int()),
+    vec_ptype2.vctrs_quux.vctrs_foobar = function(x, y, ...) new_quux(int()),
     vec_cast.vctrs_quux.vctrs_foobar = function(x, to, ...) new_quux(x),
     vec_restore.vctrs_quux = function(x, ...) new_quux(x),
     c.vctrs_foobar = function(...) foobar(NextMethod()),
